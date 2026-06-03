@@ -151,6 +151,7 @@ def train_model_simple(model,
     tokens_seen, global_step = 0, -1
 
     for epoch in range(num_epochs):
+        # 打开模型训练模式
         model.train()
         for input_batch, target_batch in train_loader:
             # 重置上一个批次迭代中的损失梯度
