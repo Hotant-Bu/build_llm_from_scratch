@@ -113,12 +113,13 @@ val_loader = create_dataloader_v1(
 
 
 def evaluate_model(model, train_loader, val_loader, device, eval_iter):
-    # 在评估阶段禁用 dropout，以产出稳定且可复现的结果
+    # 模型评估模式，在评估阶段禁用 dropout，以产出稳定且可复现的结果
     model.eval()
     # 评估阶段也会禁用梯度跟踪，因为这是不需要的，而且这样可以减少计算开销
     with torch.no_grad():
         train_loss = calc_loss_loader(train_loader, model, device, num_batches=eval_iter)
         val_loss = calc_loss_loader(val_loader, model, device, num_batches=eval_iter)
+    #     将模型重置为训练模式
     model.train()
     return train_loss, val_loss
 
