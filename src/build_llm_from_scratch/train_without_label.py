@@ -157,8 +157,9 @@ def train_model_simple(model,
             optimizer.zero_grad()
             # 计算每批次的损失梯度，交叉熵损失
             loss = calc_loss_batch(input_batch, target_batch, model, device)
-            # 反向传播，更新权重
+            # 反向传播，计算张量梯度
             loss.backward()
+            # 执行单步优化，并使用计算的梯度（反向传播）更新权重
             optimizer.step()
             # 获取参数数量
             tokens_seen += input_batch.numel()
